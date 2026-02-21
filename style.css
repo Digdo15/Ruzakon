@@ -141,6 +141,7 @@ nav {
     gap: 30px;
 }
 
+/* Disesuaikan agar berfungsi sebagai link */
 .s-card {
     background: #fff;
     padding: 40px 20px;
@@ -148,6 +149,9 @@ nav {
     border-radius: 12px;
     transition: 0.4s;
     cursor: pointer;
+    text-decoration: none; /* Menghilangkan garis bawah pada link */
+    color: inherit; /* Mengikuti warna teks bawaan */
+    display: block; /* Membuat seluruh area kotak bisa diklik */
 }
 
 .s-card i { font-size: 3rem; color: #007bff; margin-bottom: 15px; }
@@ -156,6 +160,7 @@ nav {
     background: #007bff;
     color: #fff;
     transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .s-card:hover i { color: #fff; }
@@ -175,14 +180,38 @@ nav {
     height: 250px;
 }
 
-.p-img {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transition: 0.5s;
+/* --- Efek Slider untuk Banyak Gambar di Portofolio --- */
+.p-card.multiple-images {
+    position: relative;
+    overflow: hidden;
 }
 
+.image-slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.image-slider::-webkit-scrollbar {
+    height: 6px;
+}
+.image-slider::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+}
+
+.image-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+/* Info Text Portofolio */
 .p-info {
     position: absolute;
     bottom: -100%;
@@ -192,10 +221,10 @@ nav {
     color: #fff;
     padding: 20px;
     transition: 0.5s;
+    pointer-events: none; /* Penting: agar teks tidak menghalangi saat menggeser gambar */
 }
 
 .p-card:hover .p-info { bottom: 0; }
-.p-card:hover .p-img { transform: scale(1.1); }
 
 /* Contact */
 .contact { padding: 100px 0; background: #222; color: #fff; text-align: center; }
@@ -213,7 +242,7 @@ nav {
 
 footer { background: #111; color: #777; padding: 20px 0; text-align: center; font-size: 0.9rem; }
 
-/* Animasi Scroll (Untuk Script.js) */
+/* Animasi Scroll */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -234,7 +263,7 @@ footer { background: #111; color: #777; padding: 20px 0; text-align: center; fon
 @media (max-width: 768px) {
     .menu-toggle { 
         display: block; 
-        z-index: 1001; /* Pastikan ikon selalu di atas menu */
+        z-index: 1001; 
     }
 
     .nav-links {
@@ -242,34 +271,18 @@ footer { background: #111; color: #777; padding: 20px 0; text-align: center; fon
         flex-direction: column;
         position: fixed;
         top: 0;
-        right: -100%; /* Sembunyikan di luar layar kanan */
+        right: -100%;
         background: #fff;
         width: 70%;
         height: 100vh;
         padding-top: 80px;
         box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-        transition: right 0.4s ease; /* Animasi geser */
+        transition: right 0.4s ease;
     }
 
-    .nav-links.active {
-        right: 0; /* Tampilkan menu */
-    }
-
-    .nav-links li {
-        margin: 20px 0;
-        text-align: center;
-    }
-
-    .hero h1 { 
-        font-size: 1.8rem; 
-        padding: 0 10px;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-
-    .about-flex {
-        flex-direction: column;
-    }
+    .nav-links.active { right: 0; }
+    .nav-links li { margin: 20px 0; text-align: center; }
+    .hero h1 { font-size: 1.8rem; padding: 0 10px; }
+    .section-title { font-size: 2rem; }
+    .about-flex { flex-direction: column; }
 }
