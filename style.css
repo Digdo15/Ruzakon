@@ -199,7 +199,7 @@ nav {
 
 /* Contact */
 .contact { padding: 100px 0; background: #222; color: #fff; text-align: center; }
-.social-links { display: flex; justify-content: center; gap: 20px; margin-top: 30px; }
+.social-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 30px; }
 .social-links a {
     color: #fff;
     text-decoration: none;
@@ -213,11 +213,63 @@ nav {
 
 footer { background: #111; color: #777; padding: 20px 0; text-align: center; font-size: 0.9rem; }
 
-/* Responsiveness */
-.menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+/* Animasi Scroll (Untuk Script.js) */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsiveness (Mobile Fixes) */
+.menu-toggle { 
+    display: none; 
+    font-size: 1.5rem; 
+    cursor: pointer; 
+}
 
 @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .menu-toggle { display: block; }
-    .hero h1 { font-size: 2rem; }
+    .menu-toggle { 
+        display: block; 
+        z-index: 1001; /* Pastikan ikon selalu di atas menu */
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%; /* Sembunyikan di luar layar kanan */
+        background: #fff;
+        width: 70%;
+        height: 100vh;
+        padding-top: 80px;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.4s ease; /* Animasi geser */
+    }
+
+    .nav-links.active {
+        right: 0; /* Tampilkan menu */
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .hero h1 { 
+        font-size: 1.8rem; 
+        padding: 0 10px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .about-flex {
+        flex-direction: column;
+    }
 }
